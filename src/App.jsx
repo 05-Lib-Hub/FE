@@ -1,3 +1,14 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AuthPage from './page/AuthPage';
+import Home from './page/Home';
+
 export default function App() {
-  return <div className='text-center'>hi</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/auth' element={<AuthPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
