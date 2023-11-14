@@ -1,11 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 export default function Home() {
-  const navigate = useNavigate();
-
-  return (
-    <>
-      <button onClick={() => navigate('/auth')}>로그인 페이지</button>
-    </>
-  );
+  return <></>;
 }
