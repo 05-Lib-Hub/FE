@@ -2,6 +2,9 @@ const config = {
   content: ['./src/**/*.{js,jsx}'],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        main: 'repeat(1, 1fr 3fr)',
+      },
       keyframes: {
         menuSlide: {
           '0%': {
