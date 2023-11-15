@@ -19,9 +19,12 @@ export default function Header() {
       </Link>
       <section className="flex items-center gap-6">
         <Search />
-        <button className="px-3 py-0.5 border border-black rounded-lg">
+        <Link
+          className="px-3 py-0.5 border border-black rounded-lg"
+          to="/project/new"
+        >
           New
-        </button>
+        </Link>
         {isSignedIn ? (
           <ProfileImg onClick={() => setModal(true)} />
         ) : (

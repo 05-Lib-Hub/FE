@@ -16,10 +16,10 @@ export default function Preview({ project }) {
         </section>
         <hr className="border-2" />
         <ul className="px-6 py-4 flex gap-3">
-          {project.keywords.map((keyword, index) => (
+          {project.tags.map((tag, index) => (
             <li className="inline-block" key={index}>
               <i>
-                <span className="text-red-500">#</span> {keyword}
+                <span className="text-red-500">#</span> {tag}
               </i>
             </li>
           ))}
