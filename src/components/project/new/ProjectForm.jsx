@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import OutlinedBtn from '../../ui/button/OutlinedBtn';
 import { useNavigate } from 'react-router-dom';
 import FilledBtn from '../../ui/button/FilledBtn';
+import { FiPlus } from 'react-icons/fi';
 
 const LABEL_CLASS = 'text-lg font-semibold text-gray-700';
 
@@ -17,7 +18,6 @@ export default function ProjectForm() {
     const tag = e.target.elements[0].value;
     e.target.elements[0].value = '';
     if (tag === '') return;
-    if (tags.includes(tag)) setTags(tags.filter((item) => item !== tag));
     else setTags([...tags, tag]);
   };
 
@@ -76,13 +76,16 @@ export default function ProjectForm() {
         />
       </div>
       <div>
-        <form className="flex items-center" onSubmit={addTag}>
+        <form className="flex items-center relative w-fit" onSubmit={addTag}>
           <label className={LABEL_CLASS}>태그</label>
           <input
             className="w-80 border ml-4 px-3 py-0.5 outline-none focus:border-sky-500"
             type="text"
             placeholder="등록할 태그를 입력해주세요."
           />
+          <button className="absolute right-0 px-2" type="submit">
+            <FiPlus />
+          </button>
         </form>
         <ul className="flex flex-wrap gap-2 mt-3">
           {tags.map((tag, index) => (
@@ -99,13 +102,16 @@ export default function ProjectForm() {
         </ul>
       </div>
       <div>
-        <form className="flex items-center" onSubmit={addLink}>
+        <form className="flex items-center relative w-fit" onSubmit={addLink}>
           <label className={LABEL_CLASS}>링크</label>
           <input
             className="w-[30rem] border ml-4 px-3 py-0.5 outline-none focus:border-sky-500"
             type="text"
             placeholder="관련된 링크를 등록해주세요."
           />
+          <button className="absolute right-0 px-2" type="submit">
+            <FiPlus />
+          </button>
         </form>
         <ul className="flex flex-col gap-2 mt-3">
           {links.map((link, index) => (
