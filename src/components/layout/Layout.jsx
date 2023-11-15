@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { Outlet } from 'react-router-dom';
+import Footer from './Footer';
 
 export default function Layout() {
   return (
@@ -9,6 +10,7 @@ export default function Layout() {
       <main className="max-w-screen-xl mx-auto w-full flex-grow py-14">
         <Outlet />
       </main>
+      <Footer />
     </div>
   );
 }
