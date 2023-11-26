@@ -26,7 +26,7 @@ const data = {
       libraryname: 'lib1',
       version: '1.0.0',
       usecase: 'Sample Library for project 2',
-      libraryHashtags: [],
+      libraryHashtags: ['lib1', 'lib2', 'lib3'],
       createDate: '2023-11-23T12:25:57.272222',
       modifiedDate: '2023-11-23T12:25:57.272222',
     },

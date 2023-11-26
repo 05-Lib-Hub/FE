@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Description from '../project/detail/Description';
 import MenuIcon from './icons/MenuIcon';
 import Dropdown from './dropdown/Dropdown';
+import KeywordList from '../project/detail/KeywordList';
 
 export default function Acordian({ lib, index, expandedList, handleChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -64,6 +65,9 @@ export default function Acordian({ lib, index, expandedList, handleChange }) {
           </div>
         </div>
       </AccordionSummary>
+      <AccordionDetails>
+        <KeywordList keywordList={lib.libraryHashtags} />
+      </AccordionDetails>
       <AccordionDetails>
         <Description>{lib.usecase}</Description>
       </AccordionDetails>

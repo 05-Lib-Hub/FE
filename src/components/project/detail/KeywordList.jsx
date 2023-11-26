@@ -6,7 +6,7 @@ export default function KeywordList({ keywordList }) {
       {keywordList.map((tag) => (
         <li className="text-gray-500" key={tag.id}>
           <span className="text-red-500 mr-1">#</span>
-          {tag.tag}
+          {tag.tag ?? tag}
         </li>
       ))}
     </ul>
