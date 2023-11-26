@@ -8,9 +8,11 @@ import Description from '../project/detail/Description';
 import MenuIcon from './icons/MenuIcon';
 import Dropdown from './dropdown/Dropdown';
 import KeywordList from '../project/detail/KeywordList';
+import useClickOutside from '../../hooks/useClickOutside';
 
 export default function Acordian({ lib, index, expandedList, handleChange }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const ref = useClickOutside(() => setMenuOpen(false));
 
   const handleMenu = (e) => {
     e.stopPropagation();
@@ -51,7 +53,7 @@ export default function Acordian({ lib, index, expandedList, handleChange }) {
           </div>
           <div className="absolute right-10 pt-1">
             {expandedList.includes(index) && (
-              <button className="relative" onClick={handleMenu}>
+              <button className="relative" onClick={handleMenu} ref={ref}>
                 <MenuIcon className="w-6 h-6 mr-2" />
                 {menuOpen && (
                   <Dropdown
@@ -65,12 +67,16 @@ export default function Acordian({ lib, index, expandedList, handleChange }) {
           </div>
         </div>
       </AccordionSummary>
-      <AccordionDetails>
-        <KeywordList keywordList={lib.libraryHashtags} />
-      </AccordionDetails>
-      <AccordionDetails>
-        <Description>{lib.usecase}</Description>
-      </AccordionDetails>
+      {lib.libraryHashtags && lib.libraryHashtags.length !== 0 && (
+        <AccordionDetails>
+          <KeywordList keywordList={lib.libraryHashtags} />
+        </AccordionDetails>
+      )}
+      {lib.usecase && (
+        <AccordionDetails>
+          <Description>{lib.usecase}</Description>
+        </AccordionDetails>
+      )}
     </Accordion>
   );
 }

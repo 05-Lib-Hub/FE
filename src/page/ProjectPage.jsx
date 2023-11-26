@@ -50,7 +50,7 @@ export default function ProjectPage() {
   }, [articleId]);
 
   return (
-    <section className="mx-auto w-[50rem] flex flex-col gap-4">
+    <section className="mx-auto flex flex-col gap-4">
       <ProjectHeader data={data} />
       <hr />
       <section className="flex flex-col gap-3 px-6">

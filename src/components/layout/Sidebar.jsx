@@ -30,16 +30,24 @@ export default function Sidebar({ closeModal }) {
         </section>
         <ul className="px-6 divide-y">
           <li className={LIST_CLASSNAME}>
-            <Link to="/">My Profile</Link>
+            <Link to="/me" onClick={closeModal}>
+              My Profile
+            </Link>
           </li>
           <li className={LIST_CLASSNAME}>
-            <Link to="/">My Project</Link>
+            <Link to="/" onClick={closeModal}>
+              My Project
+            </Link>
           </li>
           <li className={LIST_CLASSNAME}>
-            <Link to="/">Follower</Link>
+            <Link to="/" onClick={closeModal}>
+              Follower
+            </Link>
           </li>
           <li className={LIST_CLASSNAME}>
-            <Link to="/">Favorites</Link>
+            <Link to="/" onClick={closeModal}>
+              Favorites
+            </Link>
           </li>
         </ul>
         <button className="text-red-600 self-end mt-12 mr-6" onClick={logout}>

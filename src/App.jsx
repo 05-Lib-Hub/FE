@@ -9,6 +9,7 @@ import ProjectFormPage from './page/ProjectFormPage';
 import ProjectPage from './page/ProjectPage';
 import LibraryFormPage from './page/LibraryFormPage';
 import ProjectEditPage from './page/ProjectEditPage';
+import ProfilePage from './page/ProfilePage';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
               <Route path="edit" element={<ProjectEditPage />} />
               <Route path="library/new" element={<LibraryFormPage />} />
             </Route>
+            <Route path="/me" element={<ProfilePage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

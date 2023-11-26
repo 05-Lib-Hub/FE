@@ -4,7 +4,7 @@ import ProjectForm from '../components/project/new/ProjectForm';
 
 export default function ProjectFormPage() {
   return (
-    <section className="w-[50rem] mx-auto">
+    <section className="mx-auto">
       <Title>새 프로젝트</Title>
       <ProjectForm />
     </section>
