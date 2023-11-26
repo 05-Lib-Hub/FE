@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 import Layout from './components/layout/Layout';
 import NotFound from './page/NotFound';
 import ProjectFormPage from './page/ProjectFormPage';
+import ProjectPage from './page/ProjectPage';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/project/new" element={<ProjectFormPage />} />
+            <Route path="/project/:articleId" element={<ProjectPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

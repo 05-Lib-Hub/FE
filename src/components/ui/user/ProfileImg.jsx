@@ -1,17 +1,10 @@
 import React from 'react';
 import DefaultImg from '../../../assets/images/defaultProfileImg.png';
-import { useRecoilValue } from 'recoil';
-import { userInfoAtom } from '../../../recoil/user';
 
-export default function ProfileImg({ onClick }) {
-  const { profileImg } = useRecoilValue(userInfoAtom);
-
+export default function ProfileImg({ src }) {
   return (
-    <button
-      className="rounded-full overflow-hidden bg-gray-300 w-10 h-10 p-1"
-      onClick={onClick}
-    >
-      <img src={profileImg ? profileImg : DefaultImg} alt="profileImg" />
-    </button>
+    <div className="rounded-full overflow-hidden bg-gray-300 w-10 h-10 p-1">
+      <img src={src ? src : DefaultImg} alt="profileImg" />
+    </div>
   );
 }

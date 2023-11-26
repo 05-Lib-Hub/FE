@@ -3,10 +3,12 @@ import OutlinedBtn from '../../ui/button/OutlinedBtn';
 import { useNavigate } from 'react-router-dom';
 import FilledBtn from '../../ui/button/FilledBtn';
 import { FiPlus } from 'react-icons/fi';
+import LinkList from '../LinkList';
 
 const LABEL_CLASS = 'text-lg font-semibold text-gray-700';
 
 export default function ProjectForm() {
+  // TODO: isPublic 만들기
   const titleRef = useRef('');
   const descriptionRef = useRef('');
   const [tags, setTags] = useState([]);
@@ -102,7 +104,10 @@ export default function ProjectForm() {
         </ul>
       </div>
       <div>
-        <form className="flex items-center relative w-fit" onSubmit={addLink}>
+        <form
+          className="flex items-center relative w-fit mb-3"
+          onSubmit={addLink}
+        >
           <label className={LABEL_CLASS}>링크</label>
           <input
             className="w-[30rem] border ml-4 px-3 py-0.5 outline-none focus:border-sky-500"
@@ -113,26 +118,7 @@ export default function ProjectForm() {
             <FiPlus />
           </button>
         </form>
-        <ul className="flex flex-col gap-2 mt-3">
-          {links.map((link, index) => (
-            <li key={index}>
-              <a
-                className="text-gray-600 mr-2.5 cursor-pointer underline"
-                href={link}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {link}
-              </a>
-              <button
-                className="text-red-500"
-                onClick={() => removeLink(index)}
-              >
-                X
-              </button>
-            </li>
-          ))}
-        </ul>
+        <LinkList links={links} removeLink={removeLink} />
       </div>
       <section className="self-end flex gap-2">
         <OutlinedBtn onClick={cancel}>취소</OutlinedBtn>

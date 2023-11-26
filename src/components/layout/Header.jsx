@@ -4,12 +4,13 @@ import Search from '../ui/Search';
 import Logo from '../../assets/images/Logo.png';
 import ProfileImg from '../ui/user/ProfileImg';
 import { useRecoilValue } from 'recoil';
-import { authState } from '../../recoil/user';
+import { authState, userInfoAtom } from '../../recoil/user';
 import Sidebar from './Sidebar';
 
 export default function Header() {
   const [modal, setModal] = useState(false);
   const isSignedIn = useRecoilValue(authState);
+  const { profileImg } = useRecoilValue(userInfoAtom);
   const navigate = useNavigate();
 
   return (
@@ -26,7 +27,9 @@ export default function Header() {
           New
         </Link>
         {isSignedIn ? (
-          <ProfileImg onClick={() => setModal(true)} />
+          <button onClick={() => setModal(true)}>
+            <ProfileImg src={profileImg} />
+          </button>
         ) : (
           <button onClick={() => navigate('/auth')}>로그인/회원가입</button>
         )}

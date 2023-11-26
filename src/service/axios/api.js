@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  //   baseURL: process.env.REACT_APP_API_URL,
-  baseURL: process.env.REACT_APP_LOCAL_API_URL,
+  baseURL: process.env.REACT_APP_BASE_API_URL,
 });
 
 export const auth = {
-  login: () => api.get(''),
+  getUserInfo: () => api.get('/api/user/info'),
+  // eslint-disable-next-line no-undef
+  // (window.location.href =
+  //   'http://ec2-3-34-198-148.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'),
 };

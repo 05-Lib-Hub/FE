@@ -1,8 +1,10 @@
 import { auth } from './api';
 
-export const login = () => {
+export const getUserInfo = async () => {
   try {
-    auth.login();
+    const { data } = await auth.getUserInfo();
+    if (!data) return;
+    return data;
   } catch (error) {
     console.log(error);
   }
