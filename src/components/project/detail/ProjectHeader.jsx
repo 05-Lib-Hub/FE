@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import KeywordList from './KeywordList';
+import { useNavigate } from 'react-router-dom';
 import ProfileImg from '../../ui/user/ProfileImg';
 import OutlinedStarIcon from '../../ui/icons/OutlinedStarIcon';
 import FilledStarIcon from '../../ui/icons/FilledStarIcon';
 import MenuIcon from '../../ui/icons/MenuIcon';
 import useClickOutside from '../../../hooks/useClickOutside';
 import Dropdown from '../../ui/dropdown/Dropdown';
-import { useNavigate } from 'react-router-dom';
+import KeywordList from './KeywordList';
 
 export default function ProjectHeader({ data }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -28,10 +28,12 @@ export default function ProjectHeader({ data }) {
     navigate(`library/new`);
   };
 
-  const editProject = () => {};
+  const editProject = () => {
+    navigate(`edit`);
+  };
 
   const deleteProject = () => {
-    confirm('삭제하시겠습니까?') && alert('삭제되었습니다.');
+    if (window.confirm('삭제하시겠습니까?')) window.alert('삭제되었습니다.');
   };
 
   return (

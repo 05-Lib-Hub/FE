@@ -2,11 +2,11 @@ import React from 'react';
 import Title from '../components/ui/Title';
 import ProjectForm from '../components/project/new/ProjectForm';
 
-export default function ProjectFormPage() {
+export default function ProjectEditPage() {
   return (
     <section className="w-[50rem] mx-auto">
-      <Title>새 프로젝트</Title>
-      <ProjectForm />
+      <Title>프로젝트 수정</Title>
+      <ProjectForm isEditting />
     </section>
   );
 }

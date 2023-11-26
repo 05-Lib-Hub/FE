@@ -2,7 +2,8 @@
   "env": {
     "node": true,
     "commonjs": true,
-    "es2021": true
+    "es2021": true,
+    "browser": true
   },
   "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "parserOptions": {
@@ -10,5 +11,10 @@
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": { "react/prop-types": "off" }
+  "rules": {
+    "react/prop-types": "off",
+    "no-console": "off",
+    "react/button-has-type": "off",
+    "no-alert": "off"
+  }
 }

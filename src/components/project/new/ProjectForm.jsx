@@ -1,19 +1,24 @@
-import React, { useRef, useState } from 'react';
-import OutlinedBtn from '../../ui/button/OutlinedBtn';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FilledBtn from '../../ui/button/FilledBtn';
 import { FiPlus } from 'react-icons/fi';
+import OutlinedBtn from '../../ui/button/OutlinedBtn';
+import FilledBtn from '../../ui/button/FilledBtn';
 import LinkList from '../LinkList';
 
 const LABEL_CLASS = 'text-lg font-semibold text-gray-700';
 
-export default function ProjectForm() {
+export default function ProjectForm({ isEditting }) {
   // TODO: isPublic 만들기
   const titleRef = useRef('');
   const descriptionRef = useRef('');
   const [tags, setTags] = useState([]);
   const [links, setLinks] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('isEditting: ', isEditting);
+    // TODO: get data from server, set data
+  }, [isEditting]);
 
   const addTag = (e) => {
     e.preventDefault();
@@ -40,7 +45,8 @@ export default function ProjectForm() {
   };
 
   const cancel = () => {
-    confirm('새 프로젝트 작성을 정말 취소하시겠습니까?') && navigate(-1);
+    if (window.confirm('새 프로젝트 작성을 정말 취소하시겠습니까?'))
+      navigate(-1);
   };
 
   const submit = () => {
