@@ -3,10 +3,12 @@ import Profile from '../components/profile/Profile';
 import MyFavoriteLibs from '../components/profile/MyFavoriteLibs';
 import FilledBtn from '../components/ui/button/FilledBtn';
 import ProfileEdit from '../components/profile/ProfileEdit';
+import { useRecoilValue } from 'recoil';
+import { userInfoAtom } from '../recoil/user';
 
 const data = {
-  nickname: 'junhakjh',
-  profileImg: null,
+  //   nickname: 'junhakjh',
+  //   profileImg: null,
   links: [
     'https://junhakjh-portfolio.vercel.app/',
     'https://github.com/junhakjh',
@@ -15,6 +17,9 @@ const data = {
 
 export default function ProfilePage() {
   const [isEditting, setIsEditting] = useState(false);
+  const { nickname, profileImg } = useRecoilValue(userInfoAtom);
+  data.nickname = nickname;
+  data.profileImg = profileImg;
 
   const edit = () => {
     setIsEditting(true);

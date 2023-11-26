@@ -3,7 +3,7 @@ import { atom, selector } from 'recoil';
 export const userInfoAtom = atom({
   key: 'userInfoAtom',
   default: {
-    nickname: 'nickname',
+    nickname: 'junhakjh',
     profileImg: null,
   },
 });

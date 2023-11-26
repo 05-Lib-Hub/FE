@@ -9,7 +9,7 @@ import useClickOutside from '../../hooks/useClickOutside';
 const LIST_CLASSNAME = 'py-3';
 
 export default function Sidebar({ closeModal }) {
-  const { nickname } = useRecoilValue(userInfoAtom);
+  const { nickname, profileImg } = useRecoilValue(userInfoAtom);
   const resetUser = useResetRecoilState(userInfoAtom);
   const ref = useClickOutside(closeModal);
 
@@ -25,7 +25,7 @@ export default function Sidebar({ closeModal }) {
         ref={ref}
       >
         <section className="flex items-center gap-6 bg-sky-200 p-4">
-          <ProfileImg />
+          <ProfileImg src={profileImg} />
           <span className="text-xl">{nickname}</span>
         </section>
         <ul className="px-6 divide-y">
