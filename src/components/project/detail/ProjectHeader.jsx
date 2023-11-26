@@ -6,11 +6,14 @@ import FilledStarIcon from '../../ui/icons/FilledStarIcon';
 import MenuIcon from '../../ui/icons/MenuIcon';
 import useClickOutside from '../../../hooks/useClickOutside';
 import Dropdown from '../../ui/dropdown/Dropdown';
+import { useNavigate } from 'react-router-dom';
 
 export default function ProjectHeader({ data }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useClickOutside(() => setMenuOpen(false));
+  const navigate = useNavigate();
+
   const nickname = '그건인정을해';
 
   const toggleFavorite = () => {
@@ -21,7 +24,9 @@ export default function ProjectHeader({ data }) {
     setMenuOpen(!menuOpen);
   };
 
-  const addLibrary = () => {};
+  const addLibrary = () => {
+    navigate(`library/new`);
+  };
 
   const editProject = () => {};
 

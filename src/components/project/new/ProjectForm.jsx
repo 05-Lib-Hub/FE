@@ -92,7 +92,7 @@ export default function ProjectForm() {
         <ul className="flex flex-wrap gap-2 mt-3">
           {tags.map((tag, index) => (
             <li
-              key={tag}
+              key={index}
               className="text-sm mr-2.5 cursor-pointer inline-block"
               onClick={() => removeTag(index)}
             >

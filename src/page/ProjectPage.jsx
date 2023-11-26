@@ -46,7 +46,7 @@ export default function ProjectPage() {
   const { articleId } = useParams();
 
   useEffect(() => {
-    console.log(articleId);
+    // TODO: get data from server
   }, [articleId]);
 
   return (
