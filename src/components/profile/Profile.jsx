@@ -1,16 +1,7 @@
 import React from 'react';
 import ProfileImg from '../ui/user/ProfileImg';
 
-export default function Profile() {
-  const data = {
-    nickname: 'junhakjh',
-    profileImg: null,
-    links: [
-      'https://junhakjh-portfolio.vercel.app/',
-      'https://github.com/junhakjh',
-    ],
-  };
-
+export default function Profile({ data }) {
   return (
     <section
       className={`flex ${
