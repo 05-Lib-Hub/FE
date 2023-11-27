@@ -13,6 +13,7 @@ import ProfilePage from './page/ProfilePage';
 import ProjectListPage from './page/ProjectListPage';
 import MyProjects from './page/MyProjects';
 import FavoriteProjectsPage from './page/FavoriteProjectsPage';
+import FollowListPage from './page/FollowListPage';
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
                 <Route path="" element={<MyProjects />} />
                 <Route path="favorite" element={<FavoriteProjectsPage />} />
               </Route>
+              <Route path="follow/list" element={<FollowListPage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Route>

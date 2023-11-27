@@ -36,4 +36,7 @@ export const user = {
   getMyProjects: (page, orderBy) =>
     api.get(`project/mypage/${page}?pagingMode=${orderBy}`),
   getFavoriteProjects: () => api.get('user/favorites'),
+  getFollowers: () => api.get('follow/followerList'),
+  getFollowings: () => api.get('follow/followList'),
+  toggleFollow: (userId) => api.post(`follow/${userId}`),
 };

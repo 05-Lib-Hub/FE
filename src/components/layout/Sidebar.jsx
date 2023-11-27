@@ -50,8 +50,8 @@ export default function Sidebar({ closeModal }) {
             </Link>
           </li>
           <li className={LIST_CLASSNAME}>
-            <Link to="/" onClick={closeModal}>
-              Follower
+            <Link to="/me/follow/list" onClick={closeModal}>
+              Following/Follower
             </Link>
           </li>
         </ul>
