@@ -35,12 +35,12 @@ export default function Sidebar({ closeModal }) {
             </Link>
           </li>
           <li className={LIST_CLASSNAME}>
-            <Link to="/me" onClick={closeModal}>
+            <Link to="/me/profile" onClick={closeModal}>
               My Profile
             </Link>
           </li>
           <li className={LIST_CLASSNAME}>
-            <Link to="/" onClick={closeModal}>
+            <Link to="/me/projects" onClick={closeModal}>
               My Project
             </Link>
           </li>

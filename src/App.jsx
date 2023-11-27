@@ -11,6 +11,7 @@ import LibraryFormPage from './page/LibraryFormPage';
 import ProjectEditPage from './page/ProjectEditPage';
 import ProfilePage from './page/ProfilePage';
 import ProjectListPage from './page/ProjectListPage';
+import MyProjects from './page/MyProjects';
 
 export default function App() {
   return (
@@ -29,7 +30,10 @@ export default function App() {
                 <Route path="library/new" element={<LibraryFormPage />} />
               </Route>
             </Route>
-            <Route path="/me" element={<ProfilePage />} />
+            <Route path="/me">
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="projects" element={<MyProjects />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

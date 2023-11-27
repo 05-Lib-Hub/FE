@@ -21,3 +21,8 @@ export const project = {
   deleteProjectById: (id) => api.delete(`project/${id}`),
   favorite: (id) => api.post(`project/${id}/favorite`),
 };
+
+export const user = {
+  getMyProjects: (page, orderBy) =>
+    api.get(`project/mypage/${page}?pagingMode=${orderBy}`),
+};

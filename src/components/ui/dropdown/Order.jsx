@@ -9,7 +9,7 @@ export default function Order({ list, curOrderBy, handleOrderBy }) {
 
   return (
     <div
-      className="relative w-28 border h-7 flex items-center cursor-pointer z-50"
+      className="relative w-28 border h-7 flex items-center cursor-pointer z-40"
       onClick={() => setIsOrderListOpen(!isOrderListOpen)}
       ref={ref}
     >
