@@ -7,8 +7,6 @@ import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../recoil/user';
 
 const data = {
-  //   nickname: 'junhakjh',
-  //   profileImg: null,
   links: [
     'https://junhakjh-portfolio.vercel.app/',
     'https://github.com/junhakjh',

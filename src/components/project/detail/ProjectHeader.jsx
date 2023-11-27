@@ -8,13 +8,13 @@ import useClickOutside from '../../../hooks/useClickOutside';
 import Dropdown from '../../ui/dropdown/Dropdown';
 import KeywordList from './KeywordList';
 
-export default function ProjectHeader({ data }) {
+export default function ProjectHeader({
+  data: { projectname, projectHashtags, userResponseDto },
+}) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useClickOutside(() => setMenuOpen(false));
   const navigate = useNavigate();
-
-  const nickname = '그건인정을해';
 
   const toggleFavorite = () => {
     setIsFavorite(!isFavorite);
@@ -39,14 +39,14 @@ export default function ProjectHeader({ data }) {
   return (
     <section className="flex flex-col gap-3 px-6">
       <div className="flex justify-between">
-        <h1 className="text-3xl font-semibold">{data.title}</h1>
+        <h1 className="text-3xl font-semibold">{projectname}</h1>
         <div className="flex items-center gap-2.5">
-          <ProfileImg src={null} />
-          {nickname}
+          <ProfileImg src={userResponseDto?.profileImageUrl} />
+          {userResponseDto?.username}
         </div>
       </div>
       <div className="flex justify-between">
-        <KeywordList keywordList={data.tags} />
+        {projectHashtags && <KeywordList keywordList={projectHashtags} />}
         <div className="flex items-center gap-2.5">
           <div className="flex items-center gap-1">
             <button onClick={toggleFavorite}>
@@ -56,7 +56,8 @@ export default function ProjectHeader({ data }) {
                 <OutlinedStarIcon className="w-6 h-6" />
               )}
             </button>
-            <span className="pt-0.5 text-xl">{data.favorite}</span>
+            {/* TODO: 즐겨찾기 수 */}
+            <span className="pt-0.5 text-xl">{3}</span>
           </div>
           <button className="relative" onClick={toggleMenu} ref={ref}>
             <MenuIcon className="w-6 h-6" />

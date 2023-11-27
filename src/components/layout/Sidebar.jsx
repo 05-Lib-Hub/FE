@@ -30,6 +30,11 @@ export default function Sidebar({ closeModal }) {
         </section>
         <ul className="px-6 divide-y">
           <li className={LIST_CLASSNAME}>
+            <Link to="/project/list" onClick={closeModal}>
+              All Projects
+            </Link>
+          </li>
+          <li className={LIST_CLASSNAME}>
             <Link to="/me" onClick={closeModal}>
               My Profile
             </Link>
