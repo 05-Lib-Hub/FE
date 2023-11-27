@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -7,7 +7,11 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import OutlinedBtn from '../../ui/button/OutlinedBtn';
 import FilledBtn from '../../ui/button/FilledBtn';
 import LinkList from '../LinkList';
-import { postProject } from '../../../service/axios/project';
+import {
+  postProject,
+  getProjectById,
+  updateProjectById,
+} from '../../../service/axios/project';
 
 const LABEL_CLASS = 'text-lg font-semibold text-gray-700';
 
@@ -18,10 +22,23 @@ export default function ProjectForm({ isEditting }) {
   const [links, setLinks] = useState([]);
   const [isPublic, setIsPublic] = useState(true);
   const navigate = useNavigate();
+  const { articleId } = useParams();
 
   useEffect(() => {
-    console.log('isEditting: ', isEditting);
-    // TODO: get data from server, set data
+    if (isEditting && articleId) {
+      const getProject = async () => {
+        const data = await getProjectById(articleId);
+        if (data) {
+          titleRef.current.value = data.projectname;
+          descriptionRef.current.value = data.description;
+          setTags(data.projectHashtags);
+          setLinks(data.projectLinks);
+          setIsPublic(data.isPublic);
+        }
+      };
+
+      getProject();
+    }
   }, [isEditting]);
 
   const addTag = (e) => {
@@ -71,7 +88,10 @@ export default function ProjectForm({ isEditting }) {
       isPublic: isPublic,
     };
 
-    const id = await postProject(project);
+    const id =
+      isEditting && articleId
+        ? await updateProjectById(articleId, project)
+        : await postProject(project);
 
     if (!id) return alert('프로젝트 등록에 실패했습니다.');
     alert('새 프로젝트가 등록되었습니다.');
@@ -147,12 +167,14 @@ export default function ProjectForm({ isEditting }) {
             value={true}
             control={<Radio />}
             label="전체 공개"
+            checked={isPublic}
             onChange={handlePublic}
           />
           <FormControlLabel
             value={false}
             control={<Radio />}
             label="비공개"
+            checked={!isPublic}
             onChange={handlePublic}
           />
         </RadioGroup>
