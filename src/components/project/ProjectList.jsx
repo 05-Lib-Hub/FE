@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Title from '../ui/Title';
 import Preview from './Preview';
-import { getProjectsByPage } from '../../service/axios/project';
+import { getDashboard, getProjectsByPage } from '../../service/axios/project';
 import Pagination from '@mui/material/Pagination';
 import Order from '../ui/dropdown/Order';
 import { order, orderMapper } from '../../lib/order';
@@ -18,7 +18,9 @@ export default function ProjectList({ type }) {
       const { projectResult, totalPage } =
         type === 'all'
           ? await getProjectsByPage(page, orderMapper[orderBy])
-          : await getMyProjects(page, orderMapper[orderBy]);
+          : type === 'home'
+            ? await getDashboard(page, orderMapper[orderBy])
+            : await getMyProjects(page, orderMapper[orderBy]);
       if (projectResult) {
         setProjects(projectResult);
         setTotalPages(totalPage);

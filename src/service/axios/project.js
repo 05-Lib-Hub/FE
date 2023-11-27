@@ -1,5 +1,17 @@
 import { project } from './api';
 
+export const getDashboard = async (page, orderBy) => {
+  try {
+    const { data } = await project.getDashboard(page, orderBy);
+    if (!data) throw Error('No data');
+    const { projectResult, totalPage } = data;
+    return { projectResult, totalPage };
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
 export const getAllProjects = async () => {
   try {
     const { data } = await project.getAllProjects();

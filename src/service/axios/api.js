@@ -12,6 +12,8 @@ export const auth = {
 };
 
 export const project = {
+  getDashboard: (page, orderBy) =>
+    api.get(`project/dashboard/${page}?pagingMode=${orderBy}`),
   getAllProjects: () => api.get('project'),
   getProjectsByPage: (page, orderBy) =>
     api.get(`project/page/${page}?pagingMode=${orderBy}`),
