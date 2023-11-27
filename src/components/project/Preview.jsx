@@ -3,7 +3,13 @@ import ProfileImg from '../ui/user/ProfileImg';
 import { Link } from 'react-router-dom';
 
 export default function Preview({
-  project: { projectId, projectname, description, projectHashtags, user },
+  project: {
+    projectId,
+    projectname,
+    description,
+    projectHashtags,
+    userResponseDto,
+  },
 }) {
   return (
     <Link to={`/project/${projectId}`}>
@@ -11,7 +17,7 @@ export default function Preview({
         <section className="p-6">
           <section className="flex justify-between items-start">
             <h1 className="text-lg font-semibold">{projectname}</h1>
-            <ProfileImg src={user.profileImageUrl} />
+            <ProfileImg src={userResponseDto.profileImageUrl} />
           </section>
           <p>{description}</p>
         </section>

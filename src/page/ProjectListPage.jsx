@@ -11,10 +11,13 @@ export default function ProjectListPage() {
 
   useEffect(() => {
     const getProjects = async () => {
-      const { content, totalPages } = await getProjectsByPage(page - 1);
-      if (content) {
-        setProjects(content);
-        setTotalPages(totalPages);
+      const { projectResult, totalPage } = await getProjectsByPage(
+        page,
+        'LATEST',
+      );
+      if (projectResult) {
+        setProjects(projectResult);
+        setTotalPages(totalPage);
       }
     };
 

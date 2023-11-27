@@ -1,18 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import OutlinedBtn from '../../ui/button/OutlinedBtn';
 import FilledBtn from '../../ui/button/FilledBtn';
 import LinkList from '../LinkList';
+import { postProject } from '../../../service/axios/project';
 
 const LABEL_CLASS = 'text-lg font-semibold text-gray-700';
 
 export default function ProjectForm({ isEditting }) {
-  // TODO: isPublic 만들기
   const titleRef = useRef('');
   const descriptionRef = useRef('');
   const [tags, setTags] = useState([]);
   const [links, setLinks] = useState([]);
+  const [isPublic, setIsPublic] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,23 +48,33 @@ export default function ProjectForm({ isEditting }) {
     setLinks(links.filter((_, i) => i !== index));
   };
 
+  const handlePublic = (e) => {
+    setIsPublic(e.target.value);
+  };
+
   const cancel = () => {
     if (window.confirm('새 프로젝트 작성을 정말 취소하시겠습니까?'))
       navigate(-1);
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (titleRef.current?.value === '')
       return alert('프로젝트명을 작성해주세요.');
     if (descriptionRef.current?.value === '')
       return alert('프로젝트 설명을 작성해주세요.');
 
-    console.log(titleRef.current?.value);
-    console.log(descriptionRef.current?.value);
-    console.log(tags);
-    console.log(links);
+    const project = {
+      projectname: titleRef.current?.value,
+      description: descriptionRef.current?.value,
+      projectHashtags: tags,
+      projectLinks: links,
+      isPublic: isPublic,
+    };
+
+    const id = await postProject(project);
+
+    if (!id) return alert('프로젝트 등록에 실패했습니다.');
     alert('새 프로젝트가 등록되었습니다.');
-    const id = Math.floor(Math.random() * 100);
     navigate(`/project/${id}`);
   };
 
@@ -126,6 +140,23 @@ export default function ProjectForm({ isEditting }) {
         </form>
         <LinkList links={links} removeLink={removeLink} />
       </div>
+      <section>
+        <label className={LABEL_CLASS}>공개 여부</label>
+        <RadioGroup row>
+          <FormControlLabel
+            value={true}
+            control={<Radio />}
+            label="전체 공개"
+            onChange={handlePublic}
+          />
+          <FormControlLabel
+            value={false}
+            control={<Radio />}
+            label="비공개"
+            onChange={handlePublic}
+          />
+        </RadioGroup>
+      </section>
       <section className="self-end flex gap-2">
         <OutlinedBtn onClick={cancel}>취소</OutlinedBtn>
         <FilledBtn onClick={submit}>완료</FilledBtn>

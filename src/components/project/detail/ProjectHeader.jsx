@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProfileImg from '../../ui/user/ProfileImg';
 import OutlinedStarIcon from '../../ui/icons/OutlinedStarIcon';
@@ -7,17 +7,34 @@ import MenuIcon from '../../ui/icons/MenuIcon';
 import useClickOutside from '../../../hooks/useClickOutside';
 import Dropdown from '../../ui/dropdown/Dropdown';
 import KeywordList from './KeywordList';
+import { favorite } from '../../../service/axios/project';
 
 export default function ProjectHeader({
-  data: { projectname, projectHashtags, userResponseDto },
+  data: {
+    projectId,
+    projectname,
+    projectHashtags,
+    userResponseDto,
+    favoriteResponseDto,
+  },
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [favoriteCount, setFavoriteCount] = useState(0);
   const ref = useClickOutside(() => setMenuOpen(false));
   const navigate = useNavigate();
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+  useEffect(() => {
+    setIsFavorite(favoriteResponseDto?.liked);
+    setFavoriteCount(favoriteResponseDto?.favoriteCount);
+  }, [favoriteResponseDto]);
+
+  const toggleFavorite = async () => {
+    const res = await favorite(projectId);
+    if (res) {
+      setIsFavorite(!isFavorite);
+      setFavoriteCount(favoriteCount + (isFavorite ? -1 : 1));
+    }
   };
 
   const toggleMenu = () => {
@@ -56,8 +73,7 @@ export default function ProjectHeader({
                 <OutlinedStarIcon className="w-6 h-6" />
               )}
             </button>
-            {/* TODO: 즐겨찾기 수 */}
-            <span className="pt-0.5 text-xl">{3}</span>
+            <span className="pt-0.5 text-xl">{favoriteCount}</span>
           </div>
           <button className="relative" onClick={toggleMenu} ref={ref}>
             <MenuIcon className="w-6 h-6" />
