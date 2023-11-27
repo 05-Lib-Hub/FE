@@ -28,7 +28,10 @@ export default function App() {
               <Route path=":articleId">
                 <Route path="" element={<ProjectPage />} />
                 <Route path="edit" element={<ProjectEditPage />} />
-                <Route path="library/new" element={<LibraryFormPage />} />
+                <Route
+                  path=":title/library/new"
+                  element={<LibraryFormPage />}
+                />
               </Route>
             </Route>
             <Route path="/me">

@@ -72,9 +72,9 @@ export default function Acordian({ lib, index, expandedList, handleChange }) {
           <KeywordList keywordList={lib.libraryHashtags} />
         </AccordionDetails>
       )}
-      {lib.usecase && (
+      {lib.description && (
         <AccordionDetails>
-          <Description>{lib.usecase}</Description>
+          <Description>{lib.description}</Description>
         </AccordionDetails>
       )}
     </Accordion>

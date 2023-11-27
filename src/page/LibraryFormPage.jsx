@@ -1,14 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import LibraryForm from '../components/project/new/LibraryForm';
 
 export default function LibraryFormPage() {
-  const { articleId } = useParams();
-  const title = '소공 프로젝트';
-
-  useEffect(() => {
-    console.log(articleId);
-  }, [articleId]);
+  const { articleId, title } = useParams();
 
   return (
     <section className="mx-auto flex flex-col gap-4">

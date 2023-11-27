@@ -42,7 +42,7 @@ export default function ProjectHeader({
   };
 
   const addLibrary = () => {
-    navigate(`library/new`);
+    navigate(`${projectname}/library/new`);
   };
 
   const editProject = () => {

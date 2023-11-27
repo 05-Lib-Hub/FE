@@ -22,6 +22,10 @@ export const project = {
   favorite: (id) => api.post(`project/${id}/favorite`),
 };
 
+export const library = {
+  addLib: (projectId, lib) => api.post(`projects/${projectId}/libraries`, lib),
+};
+
 export const user = {
   getMyProjects: (page, orderBy) =>
     api.get(`project/mypage/${page}?pagingMode=${orderBy}`),

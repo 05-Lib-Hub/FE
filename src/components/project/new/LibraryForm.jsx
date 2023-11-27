@@ -3,11 +3,13 @@ import OutlinedBtn from '../../ui/button/OutlinedBtn';
 import { useNavigate } from 'react-router-dom';
 import FilledBtn from '../../ui/button/FilledBtn';
 import { FiPlus } from 'react-icons/fi';
+import { addLib } from '../../../service/axios/library';
 
 const LABEL_CLASS = 'text-lg font-semibold text-gray-700';
 
 export default function LibraryForm({ articleId }) {
   const titleRef = useRef('');
+  const versionRef = useRef('');
   const descriptionRef = useRef('');
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
@@ -25,22 +27,28 @@ export default function LibraryForm({ articleId }) {
   };
 
   const cancel = () => {
-    confirm('새 프로젝트 작성을 정말 취소하시겠습니까?') && navigate(-1);
+    confirm('새 라이브러리 작성을 정말 취소하시겠습니까?') && navigate(-1);
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (titleRef.current?.value === '')
-      return alert('프로젝트명을 작성해주세요.');
+      return alert('라이브러리명을 작성해주세요.');
+    if (versionRef.current?.value === '')
+      return alert('라이브러리 버전을 작성해주세요.');
     if (descriptionRef.current?.value === '')
-      return alert('프로젝트 설명을 작성해주세요.');
+      return alert('라이브러리 사용 사례 및 설명을 작성해주세요.');
 
-    console.log(titleRef.current?.value);
-    console.log(descriptionRef.current?.value);
-    console.log(tags);
-    console.log(articleId);
+    const library = {
+      libraryname: titleRef.current?.value,
+      description: descriptionRef.current?.value,
+      version: versionRef.current?.value,
+      libraryHashtags: tags,
+    };
+
+    const res = await addLib(articleId, library);
+    if (!res) return alert('라이브러리 등록에 실패했습니다.');
     alert('새 프로젝트가 등록되었습니다.');
-    const id = Math.floor(Math.random() * 100);
-    navigate(`/project/${id}`);
+    navigate(`/project/${articleId}`);
   };
 
   return (
@@ -60,7 +68,7 @@ export default function LibraryForm({ articleId }) {
           className="border ml-4 px-3 py-0.5 outline-none focus:border-sky-500"
           type="text"
           placeholder="ex) 0.0.1"
-          ref={titleRef}
+          ref={versionRef}
         />
       </div>
       <div className="flex flex-col gap-2">
