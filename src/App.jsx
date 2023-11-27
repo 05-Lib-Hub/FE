@@ -12,6 +12,7 @@ import ProjectEditPage from './page/ProjectEditPage';
 import ProfilePage from './page/ProfilePage';
 import ProjectListPage from './page/ProjectListPage';
 import MyProjects from './page/MyProjects';
+import FavoriteProjectsPage from './page/FavoriteProjectsPage';
 
 export default function App() {
   return (
@@ -32,7 +33,10 @@ export default function App() {
             </Route>
             <Route path="/me">
               <Route path="profile" element={<ProfilePage />} />
-              <Route path="projects" element={<MyProjects />} />
+              <Route path="projects">
+                <Route path="" element={<MyProjects />} />
+                <Route path="favorite" element={<FavoriteProjectsPage />} />
+              </Route>
             </Route>
             <Route path="*" element={<NotFound />} />
           </Route>

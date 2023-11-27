@@ -88,13 +88,16 @@ export default function ProjectForm({ isEditting }) {
       isPublic: isPublic,
     };
 
-    const id =
-      isEditting && articleId
-        ? await updateProjectById(articleId, project)
-        : await postProject(project);
-
-    if (!id) return alert('프로젝트 등록에 실패했습니다.');
-    alert('새 프로젝트가 등록되었습니다.');
+    let id;
+    if (isEditting && articleId) {
+      id = await updateProjectById(articleId, project);
+      if (!id) return alert('프로젝트 수정에 실패했습니다.');
+      alert('프로젝트가 수정되었습니다.');
+    } else {
+      id = await postProject(project);
+      if (!id) return alert('프로젝트 등록에 실패했습니다.');
+      alert('새 프로젝트가 등록되었습니다.');
+    }
     navigate(`/project/${id}`);
   };
 

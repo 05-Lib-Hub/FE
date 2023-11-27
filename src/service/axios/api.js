@@ -25,4 +25,5 @@ export const project = {
 export const user = {
   getMyProjects: (page, orderBy) =>
     api.get(`project/mypage/${page}?pagingMode=${orderBy}`),
+  getFavoriteProjects: () => api.get('user/favorites'),
 };
