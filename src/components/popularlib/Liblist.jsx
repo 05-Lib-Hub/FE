@@ -12,7 +12,7 @@ export default function Liblist() {
     );
   };
 
-  const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더해줍니다.
+  const month = date.getMonth() + 1;
   const week = getWeekOfMonth(date);
 
   useEffect(() => {

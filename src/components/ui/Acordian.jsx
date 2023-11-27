@@ -9,20 +9,35 @@ import MenuIcon from './icons/MenuIcon';
 import Dropdown from './dropdown/Dropdown';
 import KeywordList from '../project/detail/KeywordList';
 import useClickOutside from '../../hooks/useClickOutside';
+import { deleteLib } from '../../service/axios/library';
+import { useNavigate } from 'react-router-dom';
 
-export default function Acordian({ lib, index, expandedList, handleChange }) {
+export default function Acordian({
+  projectName,
+  lib,
+  index,
+  expandedList,
+  handleChange,
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useClickOutside(() => setMenuOpen(false));
+  const navigate = useNavigate();
 
   const handleMenu = (e) => {
     e.stopPropagation();
     setMenuOpen(!menuOpen);
   };
 
-  const editLibrary = () => {};
+  const editLibrary = () => {
+    navigate(`${projectName}/library/edit/${lib.libraryId}`);
+  };
 
-  const removeLibrary = () => {
-    confirm('삭제하시겠습니까?') && alert('삭제되었습니다.');
+  const removeLibrary = async () => {
+    if (confirm('삭제하시겠습니까?')) {
+      const res = await deleteLib(lib.libraryId);
+      res && alert('삭제되었습니다.');
+      window.location.reload();
+    }
   };
 
   return (

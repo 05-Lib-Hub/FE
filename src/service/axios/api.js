@@ -27,6 +27,9 @@ export const project = {
 export const library = {
   getPopularLib: () => api.get('libraryCount/top10'),
   addLib: (projectId, lib) => api.post(`projects/${projectId}/libraries`, lib),
+  getLib: (libId) => api.get(`projects/libraries/${libId}`),
+  editLib: (libId, lib) => api.patch(`projects/libraries/${libId}`, lib),
+  deleteLib: (libId) => api.delete(`projects/libraries/${libId}`),
 };
 
 export const user = {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Acordian from '../../ui/Acordian';
 
-export default function LibraryList({ libraries }) {
+export default function LibraryList({ projectName, libraries }) {
   const [expandedList, setExpandedList] = useState([]);
 
   const handleChange = (index) => (_, isExpanded) => {
@@ -17,6 +17,7 @@ export default function LibraryList({ libraries }) {
       {libraries.map((lib, index) => (
         <li className="my-4" key={lib.libraryId}>
           <Acordian
+            projectName={projectName}
             lib={lib}
             index={index}
             expandedList={expandedList}

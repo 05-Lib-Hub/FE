@@ -6,6 +6,6 @@ export const getUserInfo = async () => {
     if (!data) return;
     return data;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };

@@ -34,7 +34,10 @@ export default function ProjectPage() {
       {project.projectLibraries && project.projectLibraries.length !== 0 && (
         <>
           <hr />
-          <LibraryList libraries={project.projectLibraries} />
+          <LibraryList
+            projectName={project.projectname}
+            libraries={project.projectLibraries}
+          />
         </>
       )}
     </section>

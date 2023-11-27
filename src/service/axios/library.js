@@ -21,3 +21,36 @@ export const addLib = async (projectId, lib) => {
     return false;
   }
 };
+
+export const getLib = async (libId) => {
+  try {
+    const { data } = await library.getLib(libId);
+    if (!data) throw Error('No data');
+    return data;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
+export const editLib = async (libId, lib) => {
+  try {
+    const { data } = await library.editLib(libId, lib);
+    if (!data) throw Error('No data');
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
+export const deleteLib = async (libId) => {
+  try {
+    const { status } = await library.deleteLib(libId);
+    if (!status) throw Error('No data');
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};

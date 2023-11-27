@@ -1,18 +1,34 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import OutlinedBtn from '../../ui/button/OutlinedBtn';
 import { useNavigate } from 'react-router-dom';
 import FilledBtn from '../../ui/button/FilledBtn';
 import { FiPlus } from 'react-icons/fi';
-import { addLib } from '../../../service/axios/library';
+import { addLib, editLib, getLib } from '../../../service/axios/library';
 
 const LABEL_CLASS = 'text-lg font-semibold text-gray-700';
 
-export default function LibraryForm({ articleId }) {
+export default function LibraryForm({ articleId, libraryId }) {
   const titleRef = useRef('');
   const versionRef = useRef('');
   const descriptionRef = useRef('');
   const [tags, setTags] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (libraryId) {
+      const getLibrary = async () => {
+        const lib = await getLib(libraryId);
+        if (lib) {
+          titleRef.current.value = lib.libraryname;
+          versionRef.current.value = lib.version;
+          descriptionRef.current.value = lib.description;
+          setTags(lib.libraryHashtags);
+        }
+      };
+
+      getLibrary();
+    }
+  }, [libraryId]);
 
   const addTag = (e) => {
     e.preventDefault();
@@ -45,9 +61,15 @@ export default function LibraryForm({ articleId }) {
       libraryHashtags: tags,
     };
 
-    const res = await addLib(articleId, library);
-    if (!res) return alert('라이브러리 등록에 실패했습니다.');
-    alert('새 프로젝트가 등록되었습니다.');
+    if (libraryId) {
+      const res = await editLib(libraryId, library);
+      if (!res) return alert('라이브러리 수정에 실패했습니다.');
+      alert('라이브러리가 수정되었습니다.');
+    } else {
+      const res = await addLib(articleId, library);
+      if (!res) return alert('라이브러리 등록에 실패했습니다.');
+      alert('라이브러리가 등록되었습니다.');
+    }
     navigate(`/project/${articleId}`);
   };
 
