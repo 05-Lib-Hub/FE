@@ -7,7 +7,7 @@ import MenuIcon from '../../ui/icons/MenuIcon';
 import useClickOutside from '../../../hooks/useClickOutside';
 import Dropdown from '../../ui/dropdown/Dropdown';
 import KeywordList from './KeywordList';
-import { favorite } from '../../../service/axios/project';
+import { deleteProjectById, favorite } from '../../../service/axios/project';
 
 export default function ProjectHeader({
   data: {
@@ -49,8 +49,14 @@ export default function ProjectHeader({
     navigate(`edit`);
   };
 
-  const deleteProject = () => {
-    if (window.confirm('삭제하시겠습니까?')) window.alert('삭제되었습니다.');
+  const deleteProject = async () => {
+    if (window.confirm('삭제하시겠습니까?')) {
+      const res = await deleteProjectById(projectId);
+      if (res) {
+        window.alert('삭제되었습니다.');
+        navigate(`/`);
+      }
+    }
   };
 
   return (

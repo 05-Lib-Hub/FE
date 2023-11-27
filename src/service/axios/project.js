@@ -46,6 +46,17 @@ export const postProject = async (newProject) => {
   }
 };
 
+export const deleteProjectById = async (id) => {
+  try {
+    const { status } = await project.deleteProjectById(id);
+    if (!status) throw Error('No data');
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
+
 export const favorite = async (id) => {
   try {
     const { status } = await project.favorite(id);

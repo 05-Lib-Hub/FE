@@ -17,5 +17,6 @@ export const project = {
     api.get(`project/page/${page}?pagingMode=${orderBy}`),
   getProjectById: (id) => api.get(`project/${id}`),
   postProject: (project) => api.post('project', project),
+  deleteProjectById: (id) => api.delete(`project/${id}`),
   favorite: (id) => api.post(`project/${id}/favorite`),
 };
