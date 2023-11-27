@@ -13,8 +13,8 @@ export const auth = {
 
 export const project = {
   getAllProjects: () => api.get('project'),
-  getProjectsByPage: (page, type) =>
-    api.get(`project/page/${page}?pagingMode=${type}`),
+  getProjectsByPage: (page, orderBy) =>
+    api.get(`project/page/${page}?pagingMode=${orderBy}`),
   getProjectById: (id) => api.get(`project/${id}`),
   postProject: (project) => api.post('project', project),
   favorite: (id) => api.post(`project/${id}/favorite`),

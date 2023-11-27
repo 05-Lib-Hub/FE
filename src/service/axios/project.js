@@ -12,9 +12,9 @@ export const getAllProjects = async () => {
   }
 };
 
-export const getProjectsByPage = async (page, type) => {
+export const getProjectsByPage = async (page, orderBy) => {
   try {
-    const { data } = await project.getProjectsByPage(page, type);
+    const { data } = await project.getProjectsByPage(page, orderBy);
     if (!data) throw Error('No data');
     const { projectResult, totalPage } = data;
     return { projectResult, totalPage };
