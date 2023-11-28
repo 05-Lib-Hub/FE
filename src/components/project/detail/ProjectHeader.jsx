@@ -29,6 +29,10 @@ export default function ProjectHeader({
     setFavoriteCount(favoriteResponseDto?.favoriteCount);
   }, [favoriteResponseDto]);
 
+  const goProfile = () => {
+    navigate(`/profile/${userResponseDto?.id}`);
+  };
+
   const toggleFavorite = async () => {
     const res = await favorite(projectId);
     if (res) {
@@ -63,10 +67,12 @@ export default function ProjectHeader({
     <section className="flex flex-col gap-3 px-6">
       <div className="flex justify-between">
         <h1 className="text-3xl font-semibold">{projectname}</h1>
-        <div className="flex items-center gap-2.5">
-          <ProfileImg src={userResponseDto?.profileImageUrl} />
-          {userResponseDto?.username}
-        </div>
+        <button onClick={goProfile}>
+          <div className="flex items-center gap-2.5">
+            <ProfileImg src={userResponseDto?.profileImageUrl} />
+            {userResponseDto?.username}
+          </div>
+        </button>
       </div>
       <div className="flex justify-between">
         {projectHashtags && <KeywordList keywordList={projectHashtags} />}

@@ -43,6 +43,7 @@ export default function App() {
               </Route>
               <Route path="follow/list" element={<FollowListPage />} />
             </Route>
+            <Route path="profile/:userId" element={<ProfilePage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

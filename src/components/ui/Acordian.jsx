@@ -11,8 +11,11 @@ import KeywordList from '../project/detail/KeywordList';
 import useClickOutside from '../../hooks/useClickOutside';
 import { deleteLib } from '../../service/axios/library';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userInfoAtom } from '../../recoil/user';
 
 export default function Acordian({
+  userId,
   projectName,
   lib,
   index,
@@ -22,6 +25,7 @@ export default function Acordian({
   const [menuOpen, setMenuOpen] = useState(false);
   const ref = useClickOutside(() => setMenuOpen(false));
   const navigate = useNavigate();
+  const { id } = useRecoilValue(userInfoAtom);
 
   const handleMenu = (e) => {
     e.stopPropagation();
@@ -67,7 +71,7 @@ export default function Acordian({
             </Typography>
           </div>
           <div className="absolute right-10 pt-1">
-            {expandedList.includes(index) && (
+            {userId === id && expandedList.includes(index) && (
               <button className="relative" onClick={handleMenu} ref={ref}>
                 <MenuIcon className="w-6 h-6 mr-2" />
                 {menuOpen && (

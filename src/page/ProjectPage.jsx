@@ -35,6 +35,7 @@ export default function ProjectPage() {
         <>
           <hr />
           <LibraryList
+            userId={project.userResponseDto?.id}
             projectName={project.projectname}
             libraries={project.projectLibraries}
           />
