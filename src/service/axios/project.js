@@ -90,3 +90,15 @@ export const favorite = async (id) => {
     return false;
   }
 };
+
+export const search = async (page, orderBy, keyword) => {
+  try {
+    const { data } = await project.search(page, orderBy, keyword);
+    if (!data) throw Error('No data');
+    const { projectResult, totalPage } = data;
+    return { projectResult, totalPage };
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};

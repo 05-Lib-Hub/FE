@@ -22,6 +22,8 @@ export const project = {
   updateProjectById: (id, project) => api.patch(`project/${id}`, project),
   deleteProjectById: (id) => api.delete(`project/${id}`),
   favorite: (id) => api.post(`project/${id}/favorite`),
+  search: (page, orderBy, keyword) =>
+    api.get(`project/search/${page}?query=${keyword}&pagingMode=${orderBy}`),
 };
 
 export const library = {

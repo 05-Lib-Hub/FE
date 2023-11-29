@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import Title from '../ui/Title';
 import Preview from './Preview';
-import { getDashboard, getProjectsByPage } from '../../service/axios/project';
+import {
+  getDashboard,
+  getProjectsByPage,
+  search,
+} from '../../service/axios/project';
 import Pagination from '@mui/material/Pagination';
 import Order from '../ui/dropdown/Order';
 import { order, orderMapper } from '../../lib/order';
 import { getMyProjects } from '../../service/axios/myInfo';
+import { useParams } from 'react-router-dom';
+
+const typeMapper = {
+  all: '모든 프로젝트',
+  home: '대시보드',
+  me: '내 프로젝트',
+};
 
 export default function ProjectList({ type }) {
   const [projects, setProjects] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [orderBy, setOrderBy] = useState(order[0]);
+  const { word } = useParams();
 
   useEffect(() => {
     const getProjects = async () => {
@@ -27,9 +39,22 @@ export default function ProjectList({ type }) {
       }
     };
 
+    const getProjectsByWord = async () => {
+      const { projectResult, totalPage } = await search(
+        page,
+        orderMapper[orderBy],
+        word,
+      );
+      if (projectResult) {
+        setProjects(projectResult);
+        setTotalPages(totalPage);
+      }
+    };
+
     window.scrollTo(0, 0);
-    getProjects();
-  }, [page, orderBy]);
+    if (word) getProjectsByWord();
+    else getProjects();
+  }, [page, orderBy, word]);
 
   const handleOrderBy = (orderBy) => {
     setOrderBy(orderBy);
@@ -38,13 +63,18 @@ export default function ProjectList({ type }) {
   return (
     <section className="flex flex-col">
       <div className="flex justify-between items-start">
-        <Title>{type === 'all' ? '모든 프로젝트' : '내 프로젝트'}</Title>
+        <Title>{type ? typeMapper[type] : `"${word}" 에 대한 검색결과`}</Title>
         <Order
           list={order}
           curOrderBy={orderBy}
           handleOrderBy={handleOrderBy}
         />
       </div>
+      {projects.length === 0 && (
+        <div className="flex justify-center items-center h-96">
+          <p className="text-gray-500 text-2xl">프로젝트가 없습니다.</p>
+        </div>
+      )}
       <ul className="flex flex-col gap-8">
         {projects.map((project) => (
           <li key={project.projectId}>

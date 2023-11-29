@@ -14,6 +14,7 @@ import ProjectListPage from './page/ProjectListPage';
 import MyProjects from './page/MyProjects';
 import FavoriteProjectsPage from './page/FavoriteProjectsPage';
 import FollowListPage from './page/FollowListPage';
+import ProjectList from './components/project/ProjectList';
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/project/new" element={<ProjectFormPage />} />
             <Route path="/project">
               <Route path="list" element={<ProjectListPage />} />
+              <Route path="search/:word" element={<ProjectList />} />
               <Route path=":articleId">
                 <Route path="" element={<ProjectPage />} />
                 <Route path="edit" element={<ProjectEditPage />} />
