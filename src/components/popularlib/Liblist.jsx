@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getPopularLib } from '../../service/axios/library';
+import { Link } from 'react-router-dom';
 
 export default function Liblist() {
   const [libraries, setLibraries] = useState([]);
@@ -34,9 +35,11 @@ export default function Liblist() {
             key={item.id}
             className="flex justify-between items-center px-4 py-2"
           >
-            <span>
-              {index + 1}. {item.libraryname}
-            </span>
+            <Link to={`/project/search/lib/${item.libraryname}`}>
+              <p className="flex-grow cursor-pointer">
+                {index + 1}. {item.libraryname}
+              </p>
+            </Link>
             <span>{item.count}</span>
           </li>
         ))}

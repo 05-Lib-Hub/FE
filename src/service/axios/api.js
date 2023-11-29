@@ -24,6 +24,10 @@ export const project = {
   favorite: (id) => api.post(`project/${id}/favorite`),
   search: (page, orderBy, keyword) =>
     api.get(`project/search/${page}?query=${keyword}&pagingMode=${orderBy}`),
+  searchByLib: (page, orderBy, keyword) =>
+    api.get(
+      `project/libraries/search/${page}?query=${keyword}&pagingMode=${orderBy}`,
+    ),
 };
 
 export const library = {

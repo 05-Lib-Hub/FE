@@ -102,3 +102,15 @@ export const search = async (page, orderBy, keyword) => {
     return false;
   }
 };
+
+export const searchByLib = async (page, orderBy, keyword) => {
+  try {
+    const { data } = await project.searchByLib(page, orderBy, keyword);
+    if (!data) throw Error('No data');
+    const { projectResult, totalPage } = data;
+    return { projectResult, totalPage };
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};

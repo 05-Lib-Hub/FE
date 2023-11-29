@@ -5,6 +5,7 @@ import {
   getDashboard,
   getProjectsByPage,
   search,
+  searchByLib,
 } from '../../service/axios/project';
 import Pagination from '@mui/material/Pagination';
 import Order from '../ui/dropdown/Order';
@@ -23,7 +24,7 @@ export default function ProjectList({ type }) {
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [orderBy, setOrderBy] = useState(order[0]);
-  const { word } = useParams();
+  const { word, library } = useParams();
 
   useEffect(() => {
     const getProjects = async () => {
@@ -40,11 +41,9 @@ export default function ProjectList({ type }) {
     };
 
     const getProjectsByWord = async () => {
-      const { projectResult, totalPage } = await search(
-        page,
-        orderMapper[orderBy],
-        word,
-      );
+      const { projectResult, totalPage } = word
+        ? await search(page, orderMapper[orderBy], word)
+        : await searchByLib(page, orderMapper[orderBy], library);
       if (projectResult) {
         setProjects(projectResult);
         setTotalPages(totalPage);
@@ -52,7 +51,7 @@ export default function ProjectList({ type }) {
     };
 
     window.scrollTo(0, 0);
-    if (word) getProjectsByWord();
+    if (word || library) getProjectsByWord();
     else getProjects();
   }, [page, orderBy, word]);
 
@@ -63,7 +62,9 @@ export default function ProjectList({ type }) {
   return (
     <section className="flex flex-col">
       <div className="flex justify-between items-start">
-        <Title>{type ? typeMapper[type] : `"${word}" 에 대한 검색결과`}</Title>
+        <Title>
+          {type ? typeMapper[type] : `"${word ?? library}" 에 대한 검색결과`}
+        </Title>
         <Order
           list={order}
           curOrderBy={orderBy}

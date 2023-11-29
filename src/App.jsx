@@ -28,6 +28,7 @@ export default function App() {
             <Route path="/project">
               <Route path="list" element={<ProjectListPage />} />
               <Route path="search/:word" element={<ProjectList />} />
+              <Route path="search/lib/:library" element={<ProjectList />} />
               <Route path=":articleId">
                 <Route path="" element={<ProjectPage />} />
                 <Route path="edit" element={<ProjectEditPage />} />
