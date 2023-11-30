@@ -8,7 +8,7 @@ export default function Preview({
     projectname,
     description,
     projectHashtags,
-    userResponseDto,
+    userContentResponseDto,
   },
 }) {
   return (
@@ -17,7 +17,9 @@ export default function Preview({
         <section className="p-6">
           <section className="flex justify-between items-start">
             <h1 className="text-lg font-semibold">{projectname}</h1>
-            <ProfileImg src={userResponseDto.profileImageUrl} />
+            <ProfileImg
+              src={userContentResponseDto.userResponseDto.profileImageUrl}
+            />
           </section>
           <p>{description}</p>
         </section>

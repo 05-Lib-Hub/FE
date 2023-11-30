@@ -8,19 +8,22 @@ import useClickOutside from '../../../hooks/useClickOutside';
 import Dropdown from '../../ui/dropdown/Dropdown';
 import KeywordList from './KeywordList';
 import { deleteProjectById, favorite } from '../../../service/axios/project';
+import { useRecoilValue } from 'recoil';
+import { userInfoAtom } from '../../../recoil/user';
 
 export default function ProjectHeader({
   data: {
     projectId,
     projectname,
     projectHashtags,
-    userResponseDto,
+    userContentResponseDto,
     favoriteResponseDto,
   },
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [favoriteCount, setFavoriteCount] = useState(0);
+  const { id } = useRecoilValue(userInfoAtom);
   const ref = useClickOutside(() => setMenuOpen(false));
   const navigate = useNavigate();
 
@@ -30,7 +33,7 @@ export default function ProjectHeader({
   }, [favoriteResponseDto]);
 
   const goProfile = () => {
-    navigate(`/profile/${userResponseDto?.id}`);
+    navigate(`/profile/${userContentResponseDto?.userResponseDto?.id}`);
   };
 
   const toggleFavorite = async () => {
@@ -69,8 +72,10 @@ export default function ProjectHeader({
         <h1 className="text-3xl font-semibold">{projectname}</h1>
         <button onClick={goProfile}>
           <div className="flex items-center gap-2.5">
-            <ProfileImg src={userResponseDto?.profileImageUrl} />
-            {userResponseDto?.username}
+            <ProfileImg
+              src={userContentResponseDto?.userResponseDto.profileImageUrl}
+            />
+            {userContentResponseDto?.userResponseDto.username}
           </div>
         </button>
       </div>
@@ -87,16 +92,18 @@ export default function ProjectHeader({
             </button>
             <span className="pt-0.5 text-xl">{favoriteCount}</span>
           </div>
-          <button className="relative" onClick={toggleMenu} ref={ref}>
-            <MenuIcon className="w-6 h-6" />
-            {menuOpen && (
-              <Dropdown
-                addLibrary={addLibrary}
-                edit={editProject}
-                remove={deleteProject}
-              />
-            )}
-          </button>
+          {id === userContentResponseDto?.userResponseDto.id && (
+            <button className="relative" onClick={toggleMenu} ref={ref}>
+              <MenuIcon className="w-6 h-6" />
+              {menuOpen && (
+                <Dropdown
+                  addLibrary={addLibrary}
+                  edit={editProject}
+                  remove={deleteProject}
+                />
+              )}
+            </button>
+          )}
         </div>
       </div>
     </section>
