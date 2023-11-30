@@ -6,6 +6,7 @@ export const userInfoAtom = atom({
     id: 1,
     nickname: 'junhakjh',
     profileImg: null,
+    links: [],
   },
 });
 

@@ -54,3 +54,14 @@ export const toggleFollow = async (userId) => {
     return false;
   }
 };
+
+export const getMyInfo = async () => {
+  try {
+    const { data } = await user.getMyInfo();
+    if (!data) throw Error('No data');
+    return data;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};

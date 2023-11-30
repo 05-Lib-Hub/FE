@@ -45,4 +45,6 @@ export const user = {
   getFollowers: () => api.get('follow/followerList'),
   getFollowings: () => api.get('follow/followList'),
   toggleFollow: (userId) => api.post(`follow/${userId}`),
+  getMyInfo: () => api.get(`user/info`),
+  getUserInfo: (userId) => api.get(`user/info/${userId}`),
 };
