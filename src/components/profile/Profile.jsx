@@ -30,7 +30,7 @@ export default function Profile({
       <div className="flex flex-col flex-grow gap-3 my-3">
         <div className="flex justify-between items-center">
           <p className="text-4xl font-bold">{nickname}</p>
-          {isFollowed !== null &&
+          {isFollowed !== undefined &&
             (isFollowed ? (
               <FilledBtn className="w-28" onClick={handleFollow}>
                 Unfollow
