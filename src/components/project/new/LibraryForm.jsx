@@ -65,10 +65,13 @@ export default function LibraryForm({ articleId, libraryId }) {
       const res = await editLib(libraryId, library);
       if (!res) return alert('라이브러리 수정에 실패했습니다.');
       alert('라이브러리가 수정되었습니다.');
-    } else {
+    } else if (articleId) {
       const res = await addLib(articleId, library);
       if (!res) return alert('라이브러리 등록에 실패했습니다.');
       alert('라이브러리가 등록되었습니다.');
+    } else {
+      // TODO: 내 라이브러리 등록
+      // const res = await addLib(null, library);
     }
     navigate(`/project/${articleId}`);
   };

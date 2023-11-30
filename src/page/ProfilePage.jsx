@@ -67,7 +67,7 @@ export default function ProfilePage() {
       {isEditting && (
         <ProfileEdit user={data} close={() => setIsEditting(false)} />
       )}
-      <MyFavoriteLibs />
+      <MyFavoriteLibs userId={userInfo.id} />
       {id === userInfo.id && (
         <FilledBtn className="self-end" onClick={addLib}>
           라이브러리 추가

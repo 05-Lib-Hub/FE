@@ -10,3 +10,14 @@ export const getUserInfo = async (userId) => {
     return false;
   }
 };
+
+export const getUserLibraries = async (userId) => {
+  try {
+    const { data } = await user.getUserLibraries(userId);
+    if (!data) throw Error('No data');
+    return data;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
