@@ -10,13 +10,14 @@ import {
 import Pagination from '@mui/material/Pagination';
 import Order from '../ui/dropdown/Order';
 import { order, orderMapper } from '../../lib/order';
-import { getMyProjects } from '../../service/axios/myInfo';
+import { getFavoriteProjects, getMyProjects } from '../../service/axios/myInfo';
 import { useParams } from 'react-router-dom';
 
 const typeMapper = {
   all: '모든 프로젝트',
   home: '대시보드',
   me: '내 프로젝트',
+  favorite: '즐겨찾기',
 };
 
 export default function ProjectList({ type }) {
@@ -33,7 +34,9 @@ export default function ProjectList({ type }) {
           ? await getProjectsByPage(page, orderMapper[orderBy])
           : type === 'home'
             ? await getDashboard(page, orderMapper[orderBy])
-            : await getMyProjects(page, orderMapper[orderBy]);
+            : type === 'favorite'
+              ? await getFavoriteProjects(page, orderMapper[orderBy])
+              : await getMyProjects(page, orderMapper[orderBy]);
       if (projectResult) {
         setProjects(projectResult);
         setTotalPages(totalPage);

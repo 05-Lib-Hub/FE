@@ -11,9 +11,9 @@ export const getMyProjects = async (page, orderBy) => {
   }
 };
 
-export const getFavoriteProjects = async () => {
+export const getFavoriteProjects = async (page, orderBy) => {
   try {
-    const { data } = await user.getFavoriteProjects();
+    const { data } = await user.getFavoriteProjects(page, orderBy);
     if (!data) throw Error('No data');
     return data;
   } catch (e) {

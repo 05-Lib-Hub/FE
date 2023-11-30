@@ -1,6 +1,6 @@
 import React from 'react';
-import FavoriteProjects from '../components/project/favorite/FavoriteProjects';
+import ProjectList from '../components/project/ProjectList';
 
 export default function FavoriteProjectsPage() {
-  return <FavoriteProjects />;
+  return <ProjectList type="favorite" />;
 }
