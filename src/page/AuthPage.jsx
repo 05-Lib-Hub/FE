@@ -1,21 +1,19 @@
 import React from 'react';
 import GoogleSigninBtn from '../assets/images/GoogleSignIn.svg';
-import { getUserInfo } from '../service/axios/auth';
-
-const GOOGLE_AUTH_URL = `${process.env.REACT_APP_BASE_API_URL}outh2/authorization/google`;
+import { signIn } from '../service/axios/auth';
 
 export default function AuthPage() {
-  const getInfo = async () => {
-    const userInfo = await getUserInfo();
-    console.log(userInfo);
+  const signin = async () => {
+    const res = await signIn();
+    if (res) alert('로그인 성공');
+    else alert('로그인 실패');
   };
 
   return (
     <section className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <a href={GOOGLE_AUTH_URL}>
+      <button onClick={signin}>
         <img src={GoogleSigninBtn} alt="구글 로그인" />
-      </a>
-      <button onClick={getInfo}>정보 가져오기</button>
+      </button>
     </section>
   );
 }

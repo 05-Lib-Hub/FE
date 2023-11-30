@@ -5,7 +5,7 @@ export const api = axios.create({
 });
 
 export const auth = {
-  getUserInfo: () => api.get('user/info'),
+  signIn: () => api.get('user/login'),
   // eslint-disable-next-line no-undef
   // (window.location.href =
   //   'http://ec2-3-34-198-148.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google'),

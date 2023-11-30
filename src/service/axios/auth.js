@@ -1,11 +1,12 @@
 import { auth } from './api';
 
-export const getUserInfo = async () => {
+export const signIn = async () => {
   try {
-    const { data } = await auth.getUserInfo();
-    if (!data) return;
-    return data;
+    const { status } = await auth.signIn();
+    if (!status) throw new Error('Failed to sign in');
+    return true;
   } catch (error) {
     console.error(error);
+    return false;
   }
 };
