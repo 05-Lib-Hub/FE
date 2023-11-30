@@ -8,13 +8,6 @@ import { userInfoAtom } from '../recoil/user';
 import { useParams } from 'react-router-dom';
 import { getUserInfo } from '../service/axios/user';
 
-const data = {
-  links: [
-    'https://junhakjh-portfolio.vercel.app/',
-    'https://github.com/junhakjh',
-  ],
-};
-
 export default function ProfilePage() {
   const [isEditting, setIsEditting] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -26,8 +19,6 @@ export default function ProfilePage() {
   const [isFollowed, setIsFollowed] = useState(false);
   const { id, nickname, profileImg, links } = useRecoilValue(userInfoAtom);
   const { userId } = useParams();
-  data.nickname = nickname;
-  data.profileImg = profileImg;
 
   useEffect(() => {
     const getUserInfoById = async () => {
@@ -48,7 +39,7 @@ export default function ProfilePage() {
       getUserInfoById();
     }
     setIsEditting(false);
-  }, [id]);
+  }, [id, userId, nickname, profileImg, links]);
 
   const edit = () => {
     setIsEditting(true);
@@ -58,18 +49,13 @@ export default function ProfilePage() {
 
   return (
     <section className="flex flex-col gap-12">
-      <Profile
-        userInfo={userInfo}
-        followed={userInfo ? isFollowed : undefined}
-      />
+      <Profile userInfo={userInfo} followed={userId ? isFollowed : undefined} />
       {id === userInfo.id && (
         <FilledBtn className="self-end" onClick={edit}>
           프로필 수정
         </FilledBtn>
       )}
-      {isEditting && (
-        <ProfileEdit user={data} close={() => setIsEditting(false)} />
-      )}
+      {isEditting && <ProfileEdit close={() => setIsEditting(false)} />}
       <MyFavoriteLibs userId={userInfo.id} />
       {id === userInfo.id && (
         <FilledBtn className="self-end" onClick={addLib}>

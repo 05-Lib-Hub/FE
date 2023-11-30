@@ -65,3 +65,14 @@ export const getMyInfo = async () => {
     return false;
   }
 };
+
+export const updateMyInfo = async (userInfo) => {
+  try {
+    const { status } = await user.updateMyInfo(userInfo);
+    if (!status) throw Error('Update failed');
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};

@@ -6,14 +6,20 @@ import OutlinedBtn from '../ui/button/OutlinedBtn';
 import FilledBtn from '../ui/button/FilledBtn';
 import { FiPlus } from 'react-icons/fi';
 import LinkList from '../project/LinkList';
+import { useRecoilState } from 'recoil';
+import { userInfoAtom } from '../../recoil/user';
+import { updateMyInfo } from '../../service/axios/myInfo';
 
-export default function ProfileEdit({ user, close }) {
+export default function ProfileEdit({ close }) {
   const [imgPreview, setImgPreview] = useState(null);
+  const [profileImg, setProfileImg] = useState('');
   const [nickname, setNickname] = useState('');
   const [links, setLinks] = useState([]);
+  const [user, setUser] = useRecoilState(userInfoAtom);
 
   useEffect(() => {
-    setImgPreview(user.profileImg);
+    // setImgPreview(user.profileImg);
+    setProfileImg(user.profileImg);
     setNickname(user.nickname);
     setLinks(user.links);
   }, [user]);
@@ -45,8 +51,15 @@ export default function ProfileEdit({ user, close }) {
     }
   };
 
-  const save = () => {
-    // TODO: 정보 보내기
+  const save = async () => {
+    const updatedUser = {
+      username: nickname,
+      profileImageUrl: profileImg,
+      userLinks: links,
+    };
+    const res = await updateMyInfo(updatedUser);
+    if (!res) return alert('프로필 수정에 실패했습니다.');
+    setUser({ ...user, nickname, profileImg, links });
     close();
   };
 
