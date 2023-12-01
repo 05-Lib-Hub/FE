@@ -1,12 +1,9 @@
 import React from 'react';
 import GoogleSigninBtn from '../assets/images/GoogleSignIn.svg';
-import { signIn } from '../service/axios/auth';
 
 export default function AuthPage() {
-  const signin = async () => {
-    const res = await signIn();
-    if (res) alert('로그인 성공');
-    else alert('로그인 실패');
+  const signin = () => {
+    location.href = `${process.env.REACT_APP_BASE_API_URL}/oauth2/authorization/google`;
   };
 
   return (

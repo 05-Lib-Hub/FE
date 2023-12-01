@@ -4,10 +4,6 @@ export const api = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_API_URL}/api`,
 });
 
-export const auth = {
-  signIn: () => api.get('user/login'),
-};
-
 export const project = {
   getDashboard: (page, orderBy) =>
     api.get(`project/dashboard/${page}?pagingMode=${orderBy}`),

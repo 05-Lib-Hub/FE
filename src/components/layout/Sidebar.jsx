@@ -15,6 +15,7 @@ export default function Sidebar({ closeModal }) {
 
   const logout = () => {
     resetUser();
+    sessionStorage.removeItem('accessToken');
     window.location.href = '/';
   };
 

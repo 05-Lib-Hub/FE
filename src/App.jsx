@@ -20,8 +20,8 @@ import AuthContext from './context/AuthContext';
 export default function App() {
   return (
     <RecoilRoot>
-      <AuthContext>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthContext>
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
@@ -55,8 +55,8 @@ export default function App() {
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
-        </BrowserRouter>
-      </AuthContext>
+        </AuthContext>
+      </BrowserRouter>
     </RecoilRoot>
   );
 }
