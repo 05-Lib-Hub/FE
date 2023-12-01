@@ -9,6 +9,7 @@ export default function FollowListContainer({ followers, followings }) {
   const handleChange = (_, newValue) => {
     setValue(newValue);
   };
+
   return (
     <section>
       <Tabs

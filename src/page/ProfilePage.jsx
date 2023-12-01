@@ -45,8 +45,6 @@ export default function ProfilePage() {
     setIsEditting(true);
   };
 
-  const addLib = () => {};
-
   return (
     <section className="flex flex-col gap-12">
       <Profile userInfo={userInfo} followed={userId ? isFollowed : undefined} />
@@ -57,11 +55,6 @@ export default function ProfilePage() {
       )}
       {isEditting && <ProfileEdit close={() => setIsEditting(false)} />}
       <MyFavoriteLibs userId={userInfo.id} />
-      {id === userInfo.id && (
-        <FilledBtn className="self-end" onClick={addLib}>
-          라이브러리 추가
-        </FilledBtn>
-      )}
     </section>
   );
 }

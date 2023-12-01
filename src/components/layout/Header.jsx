@@ -6,6 +6,7 @@ import ProfileImg from '../ui/user/ProfileImg';
 import { useRecoilValue } from 'recoil';
 import { authState, userInfoAtom } from '../../recoil/user';
 import Sidebar from './Sidebar';
+import OutlinedBtn from '../ui/button/OutlinedBtn';
 
 export default function Header() {
   const [modal, setModal] = useState(false);
@@ -20,11 +21,8 @@ export default function Header() {
       </Link>
       <section className="flex items-center gap-6">
         <Search />
-        <Link
-          className="px-3 py-0.5 border border-black rounded-lg"
-          to="/project/new"
-        >
-          New
+        <Link to="/project/new">
+          <OutlinedBtn noBorder>New</OutlinedBtn>
         </Link>
         {isSignedIn ? (
           <button onClick={() => setModal(true)}>
