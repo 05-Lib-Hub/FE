@@ -43,4 +43,5 @@ export const user = {
   getUserInfo: (userId) => api.get(`user/info/${userId}`),
   getUserLibraries: (userId) => api.get(`user/usedLibrary/${userId}`),
   updateMyInfo: (user) => api.post(`user/update`, user),
+  withdraw: () => api.delete(`user/delete`),
 };

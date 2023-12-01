@@ -6,7 +6,8 @@ import ProfileEdit from '../components/profile/ProfileEdit';
 import { useRecoilValue } from 'recoil';
 import { userInfoAtom } from '../recoil/user';
 import { useParams } from 'react-router-dom';
-import { getUserInfo } from '../service/axios/user';
+import { getUserInfo, withdraw } from '../service/axios/user';
+import OutlinedBtn from '../components/ui/button/OutlinedBtn';
 
 export default function ProfilePage() {
   const [isEditting, setIsEditting] = useState(false);
@@ -45,6 +46,14 @@ export default function ProfilePage() {
     setIsEditting(true);
   };
 
+  const withdrawUser = async () => {
+    if (window.confirm('정말로 Lib Hub를 탈퇴하시겠습니까?')) {
+      const res = await withdraw();
+      if (res) alert('Lib Hub 탈퇴가 완료되었습니다.');
+      else alert('Lib Hub 탈퇴에 실패하였습니다. 다시 시도해주세요.');
+    }
+  };
+
   return (
     <section className="flex flex-col gap-12">
       <Profile userInfo={userInfo} followed={userId ? isFollowed : undefined} />
@@ -55,6 +64,14 @@ export default function ProfilePage() {
       )}
       {isEditting && <ProfileEdit close={() => setIsEditting(false)} />}
       <MyFavoriteLibs userId={userInfo.id} />
+      {id === userInfo.id && (
+        <OutlinedBtn
+          className="self-end border-red-400 text-red-400"
+          onClick={withdrawUser}
+        >
+          회원 탈퇴
+        </OutlinedBtn>
+      )}
     </section>
   );
 }

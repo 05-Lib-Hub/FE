@@ -21,3 +21,14 @@ export const getUserLibraries = async (userId) => {
     return false;
   }
 };
+
+export const withdraw = async () => {
+  try {
+    const { status } = await user.withdraw();
+    if (!status) throw Error('Delete user failed');
+    return true;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};
