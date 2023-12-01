@@ -26,6 +26,7 @@ export default function UsedLibraries({ libraries }) {
           <Tab
             className="w-44"
             key={uuidv4()}
+            sx={{ textTransform: 'none' }}
             label={
               <p className="flex items-center gap-1">
                 {lib.libraryName}{' '}
