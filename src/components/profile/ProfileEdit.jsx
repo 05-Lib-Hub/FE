@@ -52,6 +52,8 @@ export default function ProfileEdit({ close }) {
   };
 
   const save = async () => {
+    if (nickname === '') return alert('이름을 입력해주세요.');
+
     const updatedUser = {
       username: nickname,
       profileImageUrl: profileImg,

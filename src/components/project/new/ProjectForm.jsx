@@ -67,6 +67,7 @@ export default function ProjectForm({ isEditting }) {
 
   const handlePublic = (e) => {
     setIsPublic(e.target.value);
+    console.log(e.target.value);
   };
 
   const cancel = () => {
@@ -165,20 +166,20 @@ export default function ProjectForm({ isEditting }) {
       </div>
       <section>
         <label className={LABEL_CLASS}>공개 여부</label>
-        <RadioGroup row>
+        <RadioGroup value={isPublic} onChange={handlePublic} row>
           <FormControlLabel
             value={true}
             control={<Radio />}
             label="전체 공개"
-            checked={isPublic}
-            onChange={handlePublic}
+            // checked={isPublic}
+            // onChange={handlePublic}
           />
           <FormControlLabel
             value={false}
             control={<Radio />}
             label="비공개"
-            checked={!isPublic}
-            onChange={handlePublic}
+            // checked={!isPublic}
+            // onChange={handlePublic}
           />
         </RadioGroup>
       </section>
