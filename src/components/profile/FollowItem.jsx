@@ -3,6 +3,7 @@ import ProfileImg from '../ui/user/ProfileImg';
 import FilledBtn from '../ui/button/FilledBtn';
 import OutlinedBtn from '../ui/button/OutlinedBtn';
 import { toggleFollow } from '../../service/axios/myInfo';
+import { Link } from 'react-router-dom';
 
 export default function FollowItem({ user, followed }) {
   const [isFollowed, setIsFollowed] = useState(followed);
@@ -23,8 +24,13 @@ export default function FollowItem({ user, followed }) {
 
   return (
     <li className="flex items-center gap-6 py-7">
-      <ProfileImg className="w-16 h-16" src={user.profileImageUrl} />
-      <p className="text-3xl font-medium flex-grow">{user.username}</p>
+      <Link
+        className="flex items-center gap-6 flex-grow"
+        to={`/profile/${user.id}`}
+      >
+        <ProfileImg className="w-16 h-16" src={user.profileImageUrl} />
+        <p className="text-3xl font-medium flex-grow">{user.username}</p>
+      </Link>
       {isFollowed ? (
         <FilledBtn className="w-28" onClick={handleFollow}>
           Unfollow

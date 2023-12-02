@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileImg from '../ui/user/ProfileImg';
 import FilledBtn from '../ui/button/FilledBtn';
 import OutlinedBtn from '../ui/button/OutlinedBtn';
@@ -8,7 +8,11 @@ export default function Profile({
   userInfo: { id, nickname, profileImg, links },
   followed,
 }) {
-  const [isFollowed, setIsFollowed] = useState(followed);
+  const [isFollowed, setIsFollowed] = useState(false);
+
+  useEffect(() => {
+    setIsFollowed(followed);
+  }, [followed]);
 
   const handleFollow = async () => {
     const res = await toggleFollow(id);
