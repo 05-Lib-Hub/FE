@@ -21,11 +21,11 @@ export default function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
-        <AuthContext>
-          <Routes>
-            <Route element={<Layout />}>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/auth" element={<AuthPage />} />
+            <Route element={<AuthContext />}>
               <Route path="/" element={<Home />} />
-              <Route path="/auth" element={<AuthPage />} />
               <Route path="/project/new" element={<ProjectFormPage />} />
               <Route path="/project">
                 <Route path="list" element={<ProjectListPage />} />
@@ -54,8 +54,8 @@ export default function App() {
               <Route path="profile/:userId" element={<ProfilePage />} />
               <Route path="*" element={<NotFound />} />
             </Route>
-          </Routes>
-        </AuthContext>
+          </Route>
+        </Routes>
       </BrowserRouter>
     </RecoilRoot>
   );

@@ -18,7 +18,7 @@ export default function ProfileEdit({ close }) {
   const [user, setUser] = useRecoilState(userInfoAtom);
 
   useEffect(() => {
-    // setImgPreview(user.profileImg);
+    setImgPreview(user.profileImg);
     setProfileImg(user.profileImg);
     setNickname(user.nickname);
     setLinks(user.links);
