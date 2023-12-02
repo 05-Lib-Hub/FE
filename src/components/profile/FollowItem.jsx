@@ -23,7 +23,7 @@ export default function FollowItem({ user, followed }) {
 
   return (
     <li className="flex items-center gap-6 py-7">
-      <ProfileImg className="w-16 h-16" />
+      <ProfileImg className="w-16 h-16" src={user.profileImageUrl} />
       <p className="text-3xl font-medium flex-grow">{user.username}</p>
       {isFollowed ? (
         <FilledBtn className="w-28" onClick={handleFollow}>
