@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { authState, userInfoAtom } from '../recoil/user';
 import { getMyInfo } from '../service/axios/myInfo';
@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../service/axios/api';
 
 export default function AuthContext({ children }) {
+  const [loading, setLoading] = useState(true);
   const setUserInfo = useSetRecoilState(userInfoAtom);
   const isSignedIn = useRecoilValue(authState);
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ export default function AuthContext({ children }) {
   useEffect(() => {
     const accessToken = query.get('accessToken');
     if (accessToken) {
+      api.defaults.headers.common['Authorization'] = accessToken;
+      setLoading(false);
       sessionStorage.setItem('accessToken', accessToken);
       navigate('/');
     }
@@ -39,6 +42,7 @@ export default function AuthContext({ children }) {
 
     if (sessionAccessToken && !isSignedIn) {
       api.defaults.headers.common['Authorization'] = sessionAccessToken;
+      setLoading(false);
       setMyInfo();
     }
   }, [sessionAccessToken]);
@@ -47,9 +51,10 @@ export default function AuthContext({ children }) {
     const accessToken = query.get('accessToken');
 
     if (!accessToken && !sessionAccessToken) {
+      setLoading(false);
       navigate('/auth');
     }
   });
 
-  return children;
+  return !loading && children;
 }

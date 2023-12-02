@@ -15,7 +15,7 @@ export default function Preview({
     <Link to={`/project/${projectId}`}>
       <article className="border-4 rounded-2xl w-full">
         <section className="p-6">
-          <section className="flex justify-between items-start">
+          <section className="flex justify-between items-center mb-3">
             <h1 className="text-lg font-semibold">{projectname}</h1>
             <ProfileImg
               src={userContentResponseDto.userResponseDto.profileImageUrl}
