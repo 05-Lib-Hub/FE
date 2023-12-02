@@ -3,7 +3,7 @@ import Profile from '../components/profile/Profile';
 import MyFavoriteLibs from '../components/profile/MyFavoriteLibs';
 import FilledBtn from '../components/ui/button/FilledBtn';
 import ProfileEdit from '../components/profile/ProfileEdit';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userInfoAtom } from '../recoil/user';
 import { useParams } from 'react-router-dom';
 import { getUserInfo, withdraw } from '../service/axios/user';
@@ -19,6 +19,7 @@ export default function ProfilePage() {
   });
   const [isFollowed, setIsFollowed] = useState(false);
   const { id, nickname, profileImg, links } = useRecoilValue(userInfoAtom);
+  const resetUser = useResetRecoilState(userInfoAtom);
   const { userId } = useParams();
 
   useEffect(() => {
@@ -49,8 +50,12 @@ export default function ProfilePage() {
   const withdrawUser = async () => {
     if (window.confirm('정말로 Lib Hub를 탈퇴하시겠습니까?')) {
       const res = await withdraw();
-      if (res) alert('Lib Hub 탈퇴가 완료되었습니다.');
-      else alert('Lib Hub 탈퇴에 실패하였습니다. 다시 시도해주세요.');
+      if (res) {
+        resetUser();
+        sessionStorage.removeItem('accessToken');
+        alert('Lib Hub 탈퇴가 완료되었습니다.');
+        window.location.href = '/auth';
+      } else alert('Lib Hub 탈퇴에 실패하였습니다. 다시 시도해주세요.');
     }
   };
 
