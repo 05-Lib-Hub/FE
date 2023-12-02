@@ -45,3 +45,12 @@ export const user = {
   updateMyInfo: (user) => api.post(`user/update`, user),
   withdraw: () => api.delete(`user/delete`),
 };
+
+export const s3 = {
+  uploadImg: (file) =>
+    api.post('file/uploads', file, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+};

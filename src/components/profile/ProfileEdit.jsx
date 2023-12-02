@@ -9,13 +9,16 @@ import LinkList from '../project/LinkList';
 import { useRecoilState } from 'recoil';
 import { userInfoAtom } from '../../recoil/user';
 import { updateMyInfo } from '../../service/axios/myInfo';
+import { uploadImg } from '../../service/axios/s3';
+import { resizeImage } from '../../service/image/resize';
 
 export default function ProfileEdit({ close }) {
+  const [imgFile, setImgFile] = useState(null);
   const [imgPreview, setImgPreview] = useState(null);
   const [profileImg, setProfileImg] = useState('');
   const [nickname, setNickname] = useState('');
   const [links, setLinks] = useState([]);
-  const [user, setUser] = useRecoilState(userInfoAtom);
+  const [user] = useRecoilState(userInfoAtom);
 
   useEffect(() => {
     setImgPreview(user.profileImg);
@@ -26,6 +29,8 @@ export default function ProfileEdit({ close }) {
 
   const fileChange = (e) => {
     const file = e.target.files[0];
+    if (!file) return;
+    setImgFile(file);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -53,15 +58,29 @@ export default function ProfileEdit({ close }) {
 
   const save = async () => {
     if (nickname === '') return alert('이름을 입력해주세요.');
+    if (nickname.length > 10) return alert('이름은 10자 이내로 입력해주세요.');
+
+    let newProfileImg = profileImg;
+
+    if (imgFile) {
+      const resizedImage = await resizeImage(imgFile, 800, 800);
+      const formData = new FormData();
+      formData.append('files', new File([resizedImage], imgFile.name));
+      formData.append('uploadFilePath', 'user');
+      const data = await uploadImg(formData);
+      if (!data) return alert('이미지 등록에 실패했습니다.');
+      newProfileImg = data[0].uploadFileUrl;
+    }
 
     const updatedUser = {
       username: nickname,
-      profileImageUrl: profileImg,
+      profileImageUrl: newProfileImg,
       userLinks: links,
     };
     const res = await updateMyInfo(updatedUser);
     if (!res) return alert('프로필 수정에 실패했습니다.');
-    setUser({ ...user, nickname, profileImg, links });
+    alert('프로필이 수정되었습니다.');
+    window.location.reload();
     close();
   };
 
