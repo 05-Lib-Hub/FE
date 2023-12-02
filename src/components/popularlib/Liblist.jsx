@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 export default function Liblist() {
   const [libraries, setLibraries] = useState([]);
   const date = new Date();
+
   const getWeekOfMonth = (date) => {
-    let firstDayOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
-    let firstDayOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
-    return Math.ceil(
-      (firstDayOfWeek.getDate() - firstDayOfMonth.getDate() + 1) / 7,
-    );
+    const currentDate = date.getDate();
+    const startOfMonth = new Date(date.setDate(1));
+    const weekDay = startOfMonth.getDay();
+    return parseInt((weekDay - 1 + currentDate) / 7) + 1;
   };
 
   const month = date.getMonth() + 1;
