@@ -3,7 +3,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import FollowList from './FollowList';
 
-export default function FollowListContainer({ followers, followings }) {
+export default function FollowListContainer({
+  followers,
+  followings,
+  setFollowings,
+}) {
   const [value, setValue] = useState(0);
 
   const handleChange = (_, newValue) => {
@@ -22,7 +26,10 @@ export default function FollowListContainer({ followers, followings }) {
         <Tab label="Following" />
       </Tabs>
       <section className="p-4">
-        <FollowList list={value === 0 ? followers : followings} />
+        <FollowList
+          list={value === 0 ? followers : followings}
+          setFollowings={setFollowings}
+        />
       </section>
     </section>
   );

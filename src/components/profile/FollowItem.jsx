@@ -4,8 +4,9 @@ import FilledBtn from '../ui/button/FilledBtn';
 import OutlinedBtn from '../ui/button/OutlinedBtn';
 import { toggleFollow } from '../../service/axios/myInfo';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
-export default function FollowItem({ user, followed }) {
+export default function FollowItem({ user, followed, setFollowings }) {
   const [isFollowed, setIsFollowed] = useState(followed);
 
   useEffect(() => {
@@ -19,6 +20,11 @@ export default function FollowItem({ user, followed }) {
         isFollowed ? '팔로우 취소를 실패했습니다.' : '팔로우를 실패했습니다.',
       );
 
+    !isFollowed &&
+      setFollowings((prev) => {
+        const newArr = [...prev, { userResponseDto: user, followed: true }];
+        return _.uniqBy(newArr, 'userResponseDto.id');
+      });
     setIsFollowed(!isFollowed);
   };
 

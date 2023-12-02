@@ -20,13 +20,17 @@ export default function FollowListPage() {
     };
 
     getFollowList();
-  }, []);
+  }, [followings.length]);
 
   return (
     <section className="flex flex-col gap-12">
       <Profile userInfo={userInfo} />
       <FollowInfo follower={followers.length} following={followings.length} />
-      <FollowListContainer followers={followers} followings={followings} />
+      <FollowListContainer
+        followers={followers}
+        followings={followings}
+        setFollowings={setFollowings}
+      />
     </section>
   );
 }
