@@ -52,6 +52,7 @@ export default function AuthContext() {
     const accessToken = query.get('accessToken');
 
     if (!accessToken && !sessionAccessToken) {
+      alert('로그인이 필요합니다.');
       navigate('/auth');
     } else {
       setLoading(false);
