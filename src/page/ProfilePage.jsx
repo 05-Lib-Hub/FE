@@ -61,7 +61,10 @@ export default function ProfilePage() {
 
   return (
     <section className="flex flex-col gap-12">
-      <Profile userInfo={userInfo} followed={userId ? isFollowed : undefined} />
+      <Profile
+        userInfo={userInfo}
+        followed={userId && parseInt(userId) !== id ? isFollowed : undefined}
+      />
       {id === userInfo.id && (
         <FilledBtn className="self-end" onClick={edit}>
           프로필 수정
