@@ -105,7 +105,9 @@ export default function ProjectForm({ isEditting }) {
   return (
     <section className="flex flex-col gap-6">
       <div className="flex items-center">
-        <label className={LABEL_CLASS}>프로젝트명</label>
+        <label className={LABEL_CLASS}>
+          <span className="text-red-500">* </span>프로젝트명
+        </label>
         <input
           className="flex-grow border ml-4 px-3 py-0.5 outline-none focus:border-sky-500"
           type="text"
@@ -114,7 +116,9 @@ export default function ProjectForm({ isEditting }) {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <label className={LABEL_CLASS}>프로젝트 설명</label>
+        <label className={LABEL_CLASS}>
+          <span className="text-red-500">* </span>프로젝트 설명
+        </label>
         <textarea
           className="border px-3 py-0.5 outline-none focus:border-sky-500 resize-none h-48"
           placeholder="프로젝트의 설명을 작성해주세요."

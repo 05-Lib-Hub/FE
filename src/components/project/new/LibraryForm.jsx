@@ -76,7 +76,9 @@ export default function LibraryForm({ articleId, libraryId }) {
   return (
     <section className="flex flex-col gap-6">
       <div className="flex items-center">
-        <label className={LABEL_CLASS}>라이브러리 이름</label>
+        <label className={LABEL_CLASS}>
+          <span className="text-red-500">* </span>라이브러리 이름
+        </label>
         <input
           className="w-80 border ml-4 px-3 py-0.5 outline-none focus:border-sky-500"
           type="text"
@@ -85,7 +87,9 @@ export default function LibraryForm({ articleId, libraryId }) {
         />
       </div>
       <div className="flex items-center">
-        <label className={LABEL_CLASS}>버전</label>
+        <label className={LABEL_CLASS}>
+          <span className="text-red-500">* </span>버전
+        </label>
         <input
           className="border ml-4 px-3 py-0.5 outline-none focus:border-sky-500"
           type="text"
@@ -94,7 +98,9 @@ export default function LibraryForm({ articleId, libraryId }) {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <label className={LABEL_CLASS}>설명 및 사용 예시</label>
+        <label className={LABEL_CLASS}>
+          <span className="text-red-500">* </span>설명 및 사용 예시
+        </label>
         <textarea
           className="border px-3 py-0.5 outline-none focus:border-sky-500 resize-none h-48"
           placeholder="라이브러리의 설명 및 사용 예시를 작성해주세요."
